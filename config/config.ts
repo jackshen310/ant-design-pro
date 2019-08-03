@@ -70,7 +70,7 @@ if (isAntDesignProPreview) {
   ]);
 }
 
-export default {
+const config = {
   plugins,
   block: {
     defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
@@ -327,6 +327,7 @@ export default {
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+    'process.env.SINGLE_SPA': process.env.SINGLE_SPA ? true : false, // 增加环境变量
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
@@ -340,7 +341,7 @@ export default {
         resourcePath: string;
       },
       _: string,
-      localName: string
+      localName: string,
     ) => {
       if (
         context.resourcePath.includes('node_modules') ||
@@ -378,3 +379,11 @@ export default {
   },
   */
 } as IConfig;
+
+// 处理routes，在spa模式下，删除BasicLayout这个路由
+if (process.env.SINGLE_SPA) {
+  let pageRoutes = config.routes[0].routes[1].routes;
+  config.routes[0].routes = [config.routes[0].routes[0], ...pageRoutes];
+}
+
+export default config;

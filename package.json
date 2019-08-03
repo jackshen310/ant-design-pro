@@ -30,6 +30,7 @@
     "prettier": "prettier -c --write \"**/*\"",
     "site": "npm run fetch:blocks && npm run build && npm run functions:build",
     "start": "umi dev --port 9095",
+    "dev:spa": "cross-env HTML=none SINGLE_SPA=true umi dev --port 9095",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",

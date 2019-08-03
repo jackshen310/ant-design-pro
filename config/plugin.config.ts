@@ -82,6 +82,39 @@ export default (config: any) => {
         },
       },
     });
+
+  if (!process.env.SINGLE_SPA) {
+    return;
+  }
+  // 如下为针对spa的特殊配置
+  // 详细配置参考：https://github.com/neutrinojs/webpack-chain
+  // 1. 增加store入口
+  config
+    .entry('store')
+    .add('./src/single-spa/Store.js')
+    .end();
+  // 2. 修改umi入口
+  config.entryPoints
+    .get('umi')
+    .clear()
+    .end();
+  config
+    .entry('umi')
+    .add('./src/single-spa/index.js')
+    .end();
+
+  // 3. 修改output的library和libraryTarget
+  config.output
+    .library('umi')
+    .libraryTarget('amd')
+    .filename('[name].js') // TODO 这里暂时不支持生成带有hash的文件名
+    .publicPath('http://localhost:9095/') // TODO 这里暂时只能写死端口
+    .end();
+  // 4. 公共依赖抽取，因为在主项目中已经加载了
+  config.externals({
+    react: 'react',
+    'react-dom': 'react-dom',
+  });
 };
 
 const getAntdSerials = (color: string) => {
