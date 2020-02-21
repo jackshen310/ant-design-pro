@@ -3,23 +3,23 @@
  * You can view component api by:
  * https://github.com/ant-design/ant-design-pro-layout
  */
-import ProLayout, {
-  MenuDataItem,
-  BasicLayoutProps as ProLayoutProps,
-  Settings,
-  DefaultFooter,
-  SettingDrawer,
-} from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
-import { Link } from 'umi';
-import { Dispatch } from 'redux';
-import { connect } from 'dva';
-import { Icon, Result, Button } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
-import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
+import Authorized from '@/utils/Authorized';
+import { getAuthorityFromRouter, isAntDesignPro } from '@/utils/utils';
+import ProLayout, {
+  BasicLayoutProps as ProLayoutProps,
+  DefaultFooter,
+  MenuDataItem,
+  SettingDrawer,
+  Settings,
+} from '@ant-design/pro-layout';
+import { Button, Icon, Result } from 'antd';
+import { connect } from 'dva';
+import React, { useEffect } from 'react';
+import { Dispatch } from 'redux';
+import { Link } from 'umi';
+import { formatMessage } from 'umi-plugin-react/locale';
 import logo from '../assets/logo.svg';
 const noMatch = (
   <Result

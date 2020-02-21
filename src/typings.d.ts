@@ -27,6 +27,9 @@ interface Window {
     fieldsObject: GAFieldsObject | string,
   ) => void;
   reloadAuthorized: () => void;
+  g_isInIframe: boolean;
+  g_waitOpenPage: string;
+  g_search: string;
 }
 
 declare let ga: Function;

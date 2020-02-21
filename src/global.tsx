@@ -1,8 +1,8 @@
 import { Button, message, notification } from 'antd';
-
 import React from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import defaultSettings from '../config/defaultSettings';
+import { onIframeInit } from './iframe/event';
 
 const { pwa } = defaultSettings;
 // if pwa is true
@@ -81,3 +81,6 @@ if (pwa) {
     });
   }
 }
+
+// 页面初始化时，如果是作为子应用，做一些初始化的操作
+onIframeInit();
